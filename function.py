@@ -16,7 +16,8 @@ match = {
 	'marea':    [0,0.6,0.6,0,0.6,0,0,0,1,1],#面积
 	'mmeasure': [0.5,0.5,0.5,0.5,0,0,0,0,1,1],#量度
 	'mperson':  [1,0.2,0.2,0,0,0,0,0,0,0],#人名
-	'marea':    [,,,,,,,,,]#面积
+	'mnumber':  [0,0,0,0,0,0,0,0,1,1],#数量
+	'mdistance':[0,0.7,0.4,0,0.2,0.2,0,0,0.9,0.2]#距离
 }
 
 wordtype = {
@@ -38,9 +39,14 @@ wordtype = {
 def qtime(answer, perc):
 	# answer is the result of jieba.lcut
 	# perc is the percentage of current intent from LUIS
+	times = [
+		'年','月','日','号','时','小时','点','分','秒','天','岁','之前','之后'
+	]
 	score = 0
 	for word, flag in (answer):
 		score += match['mtime'][wordtype[flag]]
+		if flag == 't' or word in times:
+			score += 0.1
 	return score * perc
 
 def qlocation(answer, perc):
@@ -49,6 +55,8 @@ def qlocation(answer, perc):
 	score = 0
 	for word, flag in (answer):
 		score += match['mlocation'][wordtype[flag]]
+		if flag == 'ns':
+			score += 0.3
 	return score * perc
 
 def qarea(answer, perc):
@@ -58,6 +66,19 @@ def qarea(answer, perc):
 	for word, flag in (answer):
 		score += match['marea'][wordtype[flag]]
 	return score * perc
+
+def qarea(answer, perc):
+	area_unit = [
+		'平方公里','公顷','甲','英亩','公母','坪','平方公尺','平方尺','平方寸','平方公分',
+		'平方米','平方厘米','平方毫米','平方英里'
+	]
+	score = 0
+	for word, _ in (answer):
+		if word == '面积':
+			score = 4
+	for word, _ in (answer):
+		if word in area_unit:
+			score += 1# this one seems better?
 
 def qmeasure(answer, perc):
 	# answer is the result of jieba.lcut
@@ -117,20 +138,56 @@ def qperson(answer, perc):
 	score = 0
 	for word, flag in (answer):
 		score += match['mperson'][wordtype[flag]]
+		if flag == 'nr' or flag == 'nrfg' or flag == 'nrt':
+			score += 0.1
 	return score * perc
 
-def qarea(answer, perc):
-	area_unit = [
-		'平方公里','公顷','甲‘英亩','公母','坪','平方公尺','平方尺','平方寸','平方公分'，
-
-	]
+def qnumber(answer, perc, question):
+	qword_count = 0
 	score = 0
-	for word, _ in (answer):
-		if word == '面积':
-			score = 4
-	for word, _ in (answer):
-		if word in area_unit:
-			score
+	for qword, _ in question:
+		if qword == '多少' and question[qword_count + 1].word != '?':
+			for aword, aflag in answer:
+				if aword == question[qword_count + 1].word:
+					score += 0.5
+				if aflag == 'm':
+					score += 0.5
+		elif qword == '多少' and question[qword_count + 1].word == '?':
+			for aword, aflag in answer:
+				if aword == question[qword_count - 2].word: # noun + 是多少？
+					score += 0.5
+				if aflag == 'm':
+					score += 0.5
+		elif qword == '多' and question[qword_count + 1].word != '少' and question[qword_count + 1].word != '远': # 多远：距离
+			for aword, aflag in answer:
+				if aword == question[qword_count + 1].word:
+					score += 0.5
+				if aflag == 'm':
+					score += 0.5
+		elif qword == '几':
+			for aword, aflag in answer:
+				if aword == question[qword_count + 1].word:
+					score += 0.5
+				if aflag == 'm':
+					score += 0.5
+
+		qword_count += 1
+	return score * perc
+
+def qdistance(answer, perc):
+	word_count = -1
+	distance_unit = [
+		'车程', '公里', 'km', '千米', '米', '英尺', '对面', '附近', '不远'
+	]
+	for word, flag in (answer):
+		word_count += 1
+		score = 0
+		if word in distance_unit:
+			score += 0.5
+		if flag == 'm':
+			score += 0.5
+	return score * perc
+
 
 
 '''
