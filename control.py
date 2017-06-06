@@ -106,7 +106,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问评价" in intents:
 			perc = 1
-			score = q()
+			score = qeva(answer, perc)
 			total_score += score
 		if "询问译名" in intents:
 			perc = 1

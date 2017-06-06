@@ -14,12 +14,13 @@ match = {
     'malias':   [, , , , , , , , , ],  # 别名
     'mmethod':  [, , , , , , , , , ],  # 方法
     'mtime':    [0, 0, 0, 1, 0, 0, 0.2, 0, 1, 0],  # 时间
-    'mlocation': [0.5, 1, 0.75, 0.1, 1, 1, 0, 0, 0.2, 0],  # 地点
+    'mlocation':[0.5, 1, 0.75, 0.1, 1, 1, 0, 0, 0.2, 0],  # 地点
     'marea':    [0, 0.6, 0.6, 0, 0.6, 0, 0, 0, 1, 1],  # 面积
     'mmeasure': [0.5, 0.5, 0.5, 0.5, 0, 0, 0, 0, 1, 1],  # 量度
     'mperson':  [1, 0.2, 0.2, 0, 0, 0, 0, 0, 0, 0],  # 人名
     'mnumber':  [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],  # 数量
-    'mdistance': [0, 0.7, 0.4, 0, 0.2, 0.2, 0, 0, 0.9, 0.2]  # 距离
+    'mdistance':[0, 0.7, 0.4, 0, 0.2, 0.2, 0, 0, 0.9, 0.2]  # 距离
+    'meva':     [0.2,0.3,0.3,0,0,0,0.2,1,0.1,0.1] #评价
 }
 
 wordtype = {
@@ -268,6 +269,11 @@ def qdefinition(answer, answerStr, perc, question):
         score += 0
     return score * perc
 
+def qeva(answer, perc):
+    score = 0
+    for word, flag in (answer):
+        score += match['mtime'][wordtype[flag]]
+    return score * perc
 
 '''
 #nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
