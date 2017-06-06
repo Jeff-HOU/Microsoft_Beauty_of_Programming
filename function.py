@@ -272,8 +272,20 @@ def qdefinition(answer, answerStr, perc, question):
 def qeva(answer, perc):
     score = 0
     for word, flag in (answer):
-        score += match['mtime'][wordtype[flag]]
+        score += match['meva'][wordtype[flag]]
     return score * perc
+
+def qalias(answerStr, perc):
+    score = 0
+    aliass = [
+        "又叫", "还叫", "又称", "简称", "别称", "原来", "原名", "名为",
+        "叫", "全称", "名称", "称为", "称作", "前身"
+    ]
+    for alias in (aliass):
+        if alias in answerStr:
+            score += 5
+    return score * perc
+
 
 '''
 #nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
