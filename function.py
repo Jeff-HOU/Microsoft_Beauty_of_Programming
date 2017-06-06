@@ -20,7 +20,8 @@ match = {
     'mperson':  [1, 0.2, 0.2, 0, 0, 0, 0, 0, 0, 0],  # 人名
     'mnumber':  [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],  # 数量
     'mdistance':[0, 0.7, 0.4, 0, 0.2, 0.2, 0, 0, 0.9, 0.2]  # 距离
-    'meva':     [0.2,0.3,0.3,0,0,0,0.2,1,0.1,0.1] #评价
+    'meva':     [0.2, 0.3, 0.3, 0, 0, 0, 0.2, 1, 0.1, 0.1] #评价
+    'mpost':    [0.5, 0.1, 0.5, 0.1, 0, 0, 0.2, 0, 0, 0] #职务
 }
 
 wordtype = {
@@ -284,6 +285,12 @@ def qalias(answerStr, perc):
     for alias in (aliass):
         if alias in answerStr:
             score += 5
+    return score * perc
+
+def qpost(answer, perc):
+    score = 0
+    for word, flag in (answer):
+        score += match['mpost'][wordtype[flag]]
     return score * perc
 
 

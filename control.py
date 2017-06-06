@@ -98,7 +98,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问职务" in intents:
 			perc = 1
-			score = q()
+			score = qpost(answer, perc)
 			total_score += score
 		if "询问模样" in intents:
 			perc = 1
