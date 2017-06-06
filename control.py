@@ -114,7 +114,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问正误" in intents:
 			perc = 1
-			score = q()
+			score = qtorf(answerStr, perc)
 			total_score += score
 		f_w.write(total_score+'\n')
 f_w.close()

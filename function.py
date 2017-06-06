@@ -293,6 +293,16 @@ def qpost(answer, perc):
         score += match['mpost'][wordtype[flag]]
     return score * perc
 
+def qtorf(answerStr, perc):
+    score = 0
+    torfs = [
+        "是", "有", "可以", "能", "应该", "允许", "不", "否", "大概" 
+    ]
+
+    for torf in (torfs):
+        if torf in answerStr:
+            score += 5
+    return score * perc
 
 '''
 #nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
