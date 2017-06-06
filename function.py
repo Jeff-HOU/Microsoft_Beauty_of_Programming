@@ -60,7 +60,6 @@ def qtime(answer, perc):
             score += 0.1
     return score * perc
 
-
 def qlocation(answer, perc):
     # answer is the result of jieba.lcut
     # perc is the percentage of current intent from LUIS
@@ -71,8 +70,7 @@ def qlocation(answer, perc):
             score += 0.3
     return score * perc
 
-
-# why 2 qarea?
+'''
 def qarea(answer, perc):
     # answer is the result of jieba.lcut
     # perc is the percentage of current intent from LUIS
@@ -80,9 +78,8 @@ def qarea(answer, perc):
     for word, flag in (answer):
         score += match['marea'][wordtype[flag]]
     return score * perc
+'''
 
-
-# why 2 qarea?
 def qarea(answer, perc):
     area_unit = [
         '平方公里', '公顷', '甲', '英亩', '公母', '坪', '平方公尺', '平方尺', '平方寸', '平方公分',
@@ -96,7 +93,6 @@ def qarea(answer, perc):
         if word in area_unit:
             score += 1  # this one seems better?
 
-
 def qmeasure(answer, perc):
     # answer is the result of jieba.lcut
     # perc is the percentage of current intent from LUIS
@@ -104,7 +100,6 @@ def qmeasure(answer, perc):
     for word, flag in (answer):
         score += match['mmeasure'][wordtype[flag]]
     return score * perc
-
 
 def qtranslate(answer, perc, question):
     # question is the result of jieba.lcut(question)
@@ -152,7 +147,6 @@ def qtranslate(answer, perc, question):
                 if detect(aword) in languages:
                     return 5 * perc
 
-
 def qperson(answer, perc):
     score = 0
     for word, flag in (answer):
@@ -160,7 +154,6 @@ def qperson(answer, perc):
         if flag == 'nr' or flag == 'nrfg' or flag == 'nrt':
             score += 0.1
     return score * perc
-
 
 def qnumber(answer, perc, question):
     qword_count = 0
@@ -194,7 +187,6 @@ def qnumber(answer, perc, question):
         qword_count += 1
     return score * perc
 
-
 def qdistance(answer, perc):
     word_count = -1
     distance_unit = [
@@ -208,7 +200,6 @@ def qdistance(answer, perc):
         if flag == 'm':
             score += 0.5
     return score * perc
-
 
 def qmethod(answer, perc, question):
     # answer type: array
