@@ -304,6 +304,20 @@ def qtorf(answerStr, perc):
             score += 5
     return score * perc
 
+def qstatus(answerStr, perc):
+    score = 0
+    statuss = [
+        "活着", "模式"
+    ]
+    for status in (statuss):
+        if status in answerStr:
+            score += 5
+    return score * perc
+
+
+
+
+
 '''
 #nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
 #  0       1        2        3      4        5      6      7    8     9
