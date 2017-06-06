@@ -228,7 +228,7 @@ def qreason(answerStr, perc):
     score = 0
     content_json = ltp_cloud_api(answerStr, 'sdp')
 
-    for content in content_json[0][0]:
+    for content in content_json[0][0]: # reason for these two zero: see sample_return_from_ltp_cloud_api.json
         if "semrelate" in content and content["semrelate"] == "eCau":
             score += 5
             break
@@ -244,7 +244,7 @@ def qpossess(answerStr, perc):
     score = 0
     content_json = ltp_cloud_api(answerStr, 'sdp')
     
-    for content in content_json[0][0]:
+    for content in content_json[0][0]: # reason for these two zero: see sample_return_from_ltp_cloud_api.json
         if "semrelate" in content and content["semrelate"] == "Poss":
             score += 5
             break
@@ -252,6 +252,31 @@ def qpossess(answerStr, perc):
             score += 5
             break
     return score * perc
+
+def qdefinition(answer, answerStr, perc, question):
+    score = 0
+    if "网址" in answerStr:
+        if urls = re.findall('(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', answerStr):
+            score += 3
+    elif "是" in answerStr or "指" in answerStr or "叫" in answerStr or "哪" in answerStr:
+        content_json = ltp_cloud_api(answerStr, 'sdp')
+        for content in content_json[0][0]: # reason for these two zero: see sample_return_from_ltp_cloud_api.json
+            if "semrelate" in content and content["semrelate"] == "Clas":
+                score += 5
+                break
+    elif "什么" in answerStr:
+        word_count = -1
+        for qword, _ in (question):
+            word_count += 1
+            if qword == "什么":
+                for aword, _ in (answer):
+                    if aword == question[word_count + 1].word:
+                        score += 3
+                        break
+    else:
+        score += 0
+    return score * perc
+
 
 '''
 #nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
