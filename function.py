@@ -324,6 +324,16 @@ def qchange(answerStr, perc):
             score += 5
     return score * perc
 
+def qconsist(answerStr, perc):
+    score = 0
+    consist = [
+        "组", "构", "成", "有", "由", "造", "含", "包", "括" 
+    ]
+    for consist in (consists):
+        if consist in answerStr:
+            score += 5
+    return score * perc
+
 
 
 '''

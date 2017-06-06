@@ -78,7 +78,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问组成" in intents:
 			perc = 1
-			score = q()
+			score = qconsist(answerStr, perc)
 			total_score += score
 		if "询问属于关系" in intents:
 			perc = 1
