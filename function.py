@@ -231,6 +231,29 @@ def qreason(answerStr, perc):
         if "semrelate" in content and content["semrelate"] == "eResu":
             score += 5
             break
+        if "semrelate" in content and content["semrelate"] == "Reas":
+        score += 5
+        break
+    return score * perc
+
+def qpossess(answerStr, perc):
+    score = 0
+    url_get_base = "http://api.ltp-cloud.com/analysis/"
+    args = { 
+        'api_key' : 'u1i1v9Y9555gfxnp4PmKVdhyGcPD7t0xJdklcQCv',
+        'text' : answerStr,
+        'pattern' : 'sdp',
+        'format' : 'json'
+    }
+    result = urllib.urlopen(url_get_base, urllib.urlencode(args)) # POST method
+    content_json = result.read().strip()
+    for content in content_json[0][0]:
+        if "semrelate" in content and content["semrelate"] == "Poss":
+            score += 5
+            break
+        if "semrelate" in content and content["semrelate"] == "Belg":
+            score += 5
+            break
     return score * perc
 
 '''
