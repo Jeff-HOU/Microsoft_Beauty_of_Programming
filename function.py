@@ -314,7 +314,15 @@ def qstatus(answerStr, perc):
             score += 5
     return score * perc
 
-
+def qchange(answerStr, perc):
+    score = 0
+    changes = [
+        "变", "改", "同", "不", "动", "替", "更", "转", "掉", "换"
+    ]
+    for change in (changes):
+        if change in answerStr:
+            score += 5
+    return score * perc
 
 
 

@@ -70,7 +70,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问不同变化" in intents:
 			perc = 1
-			score = q()
+			score = qchange(answerStr, perc)
 			total_score += score
 		if "询问原因" in intents:
 			perc = 1
