@@ -86,7 +86,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问别名" in intents:
 			perc = 1
-			score = q()
+			score = qalias(answerStr, perc)
 			total_score += score
 		if "询问距离" in intents:
 			perc = 1
