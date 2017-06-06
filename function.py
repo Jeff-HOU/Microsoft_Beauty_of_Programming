@@ -35,6 +35,17 @@ wordtype = {
     'q': 9
 }
 
+def ltp_cloud_api(answerStr, pattern):
+    url_get_base = "http://api.ltp-cloud.com/analysis/"
+    args = { 
+        'api_key' : 'u1i1v9Y9555gfxnp4PmKVdhyGcPD7t0xJdklcQCv',
+        'text' : answerStr,
+        'pattern' : pattern,
+        'format' : 'json'
+    }
+    result = urllib.urlopen(url_get_base, urllib.urlencode(args)) # POST method
+    content_json = result.read().strip()
+    return content_json
 
 def qtime(answer, perc):
     # answer is the result of jieba.lcut
@@ -215,15 +226,8 @@ def qmethod(answer, perc, question):
 def qreason(answerStr, perc):
     # answer type: str
     score = 0
-    url_get_base = "http://api.ltp-cloud.com/analysis/"
-    args = { 
-        'api_key' : 'u1i1v9Y9555gfxnp4PmKVdhyGcPD7t0xJdklcQCv',
-        'text' : answerStr,
-        'pattern' : 'sdp',
-        'format' : 'json'
-    }
-    result = urllib.urlopen(url_get_base, urllib.urlencode(args)) # POST method
-    content_json = result.read().strip()
+    content_json = ltp_cloud_api(answerStr, 'sdp')
+
     for content in content_json[0][0]:
         if "semrelate" in content and content["semrelate"] == "eCau":
             score += 5
@@ -238,15 +242,8 @@ def qreason(answerStr, perc):
 
 def qpossess(answerStr, perc):
     score = 0
-    url_get_base = "http://api.ltp-cloud.com/analysis/"
-    args = { 
-        'api_key' : 'u1i1v9Y9555gfxnp4PmKVdhyGcPD7t0xJdklcQCv',
-        'text' : answerStr,
-        'pattern' : 'sdp',
-        'format' : 'json'
-    }
-    result = urllib.urlopen(url_get_base, urllib.urlencode(args)) # POST method
-    content_json = result.read().strip()
+    content_json = ltp_cloud_api(answerStr, 'sdp')
+    
     for content in content_json[0][0]:
         if "semrelate" in content and content["semrelate"] == "Poss":
             score += 5
