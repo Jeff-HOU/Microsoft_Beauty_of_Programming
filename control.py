@@ -50,7 +50,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问量度" in intents:
 			perc = 1
-			score = q()
+			score = qenum(answerStr, perc)
 			total_score += score
 		if "询问名称定义" in intents:
 			perc = 1
@@ -102,7 +102,7 @@ with open(test_data_path) as f_r:
 			total_score += score
 		if "询问模样" in intents:
 			perc = 1
-			score = q()
+			score = qappearance(answerStr, perc)
 			total_score += score
 		if "询问评价" in intents:
 			perc = 1

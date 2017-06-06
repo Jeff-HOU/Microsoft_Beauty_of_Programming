@@ -334,6 +334,25 @@ def qconsist(answerStr, perc):
             score += 5
     return score * perc
 
+def qappearance(answerStr, perc):
+    score = 0
+    appearances = [
+        "样", "模", "长", "子", "相", "面", "表", "形", "态" 
+    ]
+    for appearance in (appearances):
+        if appearance in answerStr:
+            score += 5
+    return score * perc
+
+def qenum(answerStr, perc):
+    score = 0
+    if '、' in answerStr:
+        score += 5
+    return score * perc
+
+
+
+
 
 
 '''
