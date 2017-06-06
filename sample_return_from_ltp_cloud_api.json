@@ -1,0 +1,75 @@
+
+[
+  [
+    [
+      {
+        "id": 0,
+        "cont": "我",
+        "pos": "r",
+        "ne": "O",
+        "parent": 1,
+        "relate": "SBV",
+        "semparent": 1,
+        "semrelate": "Exp",
+        "arg": []
+      },
+      {
+        "id": 1,
+        "cont": "是",
+        "pos": "v",
+        "ne": "O",
+        "parent": -1,
+        "relate": "HED",
+        "semparent": -1,
+        "semrelate": "Root",
+        "arg": [
+          {
+            "id": 0,
+            "type": "A0",
+            "beg": 0,
+            "end": 0
+          },
+          {
+            "id": 1,
+            "type": "A1",
+            "beg": 2,
+            "end": 3
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "cont": "中国",
+        "pos": "ns",
+        "ne": "S-Ns",
+        "parent": 3,
+        "relate": "ATT",
+        "semparent": 3,
+        "semrelate": "Nmod",
+        "arg": []
+      },
+      {
+        "id": 3,
+        "cont": "人",
+        "pos": "n",
+        "ne": "O",
+        "parent": 1,
+        "relate": "VOB",
+        "semparent": 1,
+        "semrelate": "Clas",
+        "arg": []
+      },
+      {
+        "id": 4,
+        "cont": "。",
+        "pos": "wp",
+        "ne": "O",
+        "parent": 1,
+        "relate": "WP",
+        "semparent": 1,
+        "semrelate": "mPunc",
+        "arg": []
+      }
+    ]
+  ]
+]
