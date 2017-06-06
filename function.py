@@ -1,6 +1,8 @@
 from langdetect import detect
 import zhon.pinyin
 import re
+import urllib
+import json
 
 #    nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
 #      0       1        2        3      4        5      6      7    8     9
@@ -210,6 +212,26 @@ def qmethod(answer, perc, question):
                 score += 0.5
     return score * perc
 
+def qreason(answerStr, perc):
+    # answer type: str
+    score = 0
+    url_get_base = "http://api.ltp-cloud.com/analysis/"
+    args = { 
+        'api_key' : 'u1i1v9Y9555gfxnp4PmKVdhyGcPD7t0xJdklcQCv',
+        'text' : answerStr,
+        'pattern' : 'sdp',
+        'format' : 'json'
+    }
+    result = urllib.urlopen(url_get_base, urllib.urlencode(args)) # POST method
+    content_json = result.read().strip()
+    for content in content_json[0][0]:
+        if "semrelate" in content and content["semrelate"] == "eCau":
+            score += 5
+            break
+        if "semrelate" in content and content["semrelate"] == "eResu":
+            score += 5
+            break
+    return score * perc
 
 '''
 #nr人名  ns地名  nt機構名  t時間詞  s處所詞  f方位詞  v動詞 a形容詞 m數詞 q量詞
