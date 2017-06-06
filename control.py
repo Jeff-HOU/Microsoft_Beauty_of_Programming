@@ -1,6 +1,6 @@
 # general control
 import function
-import luis_control
+#import luis_control
 import jieba
 import jieba.posseg as pseg
 import os
