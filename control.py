@@ -1,5 +1,5 @@
 # general control
-import function
+import function as fn
 #import luis_control
 import jieba
 import jieba.posseg as pseg
@@ -38,83 +38,83 @@ with open(test_data_path) as f_r:
 				intents.append(intent["intent"])
 		if "询问时间" in intents:
 			perc = 1
-			score = qtime(answer, perc)
+			score = fn.qtime(answer, perc)
 			total_score += score
 		if "询问人名" in intents:
 			perc = 1
-			score = qperson(answer, perc)
+			score = fn.qperson(answer, perc)
 			total_score += score
 		if "询问数量" in intents:
 			perc = 1
-			score = qnumber(answer, perc, question)
+			score = fn.qnumber(answer, perc, question)
 			total_score += score
 		if "询问量度" in intents:
 			perc = 1
-			score = qenum(answerStr, perc)
+			score = fn.qenum(answerStr, perc)
 			total_score += score
 		if "询问名称定义" in intents:
 			perc = 1
-			score = qdefinition(answer, answerStr, perc, question)
+			score = fn.qdefinition(answer, answerStr, perc, question)
 			total_score += score
 		if "询问面积" in intents:
 			perc = 1
-			score = qarea(answer, perc)
+			score = fn.qarea(answer, perc)
 			total_score += score
 		if "询问方法" in intents:
 			perc = 1
-			score = qmethod(answer, perc, question)
+			score = fn.qmethod(answer, perc, question)
 			total_score += score
 		if "询问地点" in intents:
 			perc = 1
-			score = qlocation(answer, perc)
+			score = fn.qlocation(answer, perc)
 			total_score += score
 		if "询问不同变化" in intents:
 			perc = 1
-			score = qchange(answerStr, perc)
+			score = fn.qchange(answerStr, perc)
 			total_score += score
 		if "询问原因" in intents:
 			perc = 1
-			score = qreason(answer, perc)
+			score = fn.qreason(answer, perc)
 			total_score += score
 		if "询问组成" in intents:
 			perc = 1
-			score = qconsist(answerStr, perc)
+			score = fn.qconsist(answerStr, perc)
 			total_score += score
 		if "询问属于关系" in intents:
 			perc = 1
-			score = qpossess(answerStr, perc)
+			score = fn.qpossess(answerStr, perc)
 			total_score += score
 		if "询问别名" in intents:
 			perc = 1
-			score = qalias(answerStr, perc)
+			score = fn.qalias(answerStr, perc)
 			total_score += score
 		if "询问距离" in intents:
 			perc = 1
-			score = qdistance(answer, perc)
+			score = fn.qdistance(answer, perc)
 			total_score += score
 		if "询问状态" in intents:
 			perc = 1
-			score = qstatus(answerStr, perc)
+			score = fn.qstatus(answerStr, perc)
 			total_score += score
 		if "询问职务" in intents:
 			perc = 1
-			score = qpost(answer, perc)
+			score = fn.qpost(answer, perc)
 			total_score += score
 		if "询问模样" in intents:
 			perc = 1
-			score = qappearance(answerStr, perc)
+			score = fn.qappearance(answerStr, perc)
 			total_score += score
 		if "询问评价" in intents:
 			perc = 1
-			score = qeva(answer, perc)
+			score = fn.qeva(answer, perc)
 			total_score += score
 		if "询问译名" in intents:
 			perc = 1
-			score = qtranslate(answer, perc, question)
+			score = fn.qtranslate(answer, perc, question)
 			total_score += score
 		if "询问正误" in intents:
 			perc = 1
-			score = qtorf(answerStr, perc)
+			score = fn.qtorf(answerStr, perc)
 			total_score += score
 		f_w.write(total_score+'\n')
 f_w.close()
